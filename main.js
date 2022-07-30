@@ -1,58 +1,46 @@
-
-
 // Selector
 
-let todoInput = document.querySelector('.todo-input');
-// let todoButton = document.getElementById('todo-button').onclick = function(){
-//     console.log('this is onclick function')
-// }
-let todoButton = document.querySelector('.todo-button');
-let todoList = document.querySelector('.todo-list');
+const todoInput = document.querySelector('.todo-input');
+const todoButton = document.querySelector('.todo-button');
+const todoList = document.querySelector('.todo-list');
 
-// EventListener
 
 todoButton.addEventListener('click', addTodo);
-todoButton.addEventListener('click', deleteCheck);
 
-
-// Function
-
-function addTodo(event){
-
-    event.preventDefault();
-    console.log('This is working')
-    // To create a div for todo
-    let todoDiv = document.createElement('div');
-    todoDiv.classList.add('todo');
-    // create list of todos
-    let newTodo = document.createElement('li');
+function addTodo(e){
+    e.preventDefault();
+    const newDiv = document.createElement('div');
+    newDiv.classList.add('todo');
+    
+    const newTodo = document.createElement('li');
     newTodo.innerText = todoInput.value;
-    newTodo.classList.add('todo-item');
-    // added newTodo list to todoDiv 
-    todoDiv.appendChild(newTodo);
-
-    // created a check button 
-    let completeButton = document.createElement('button');
-    completeButton.innerHTML = "<i class='fas fa-check'></i>";
-    completeButton.classList.add('complete-btn');
-    todoDiv.appendChild(completeButton)
-
-
-    // created a delete button 
-    let deleteButton = document.createElement('button');
-    deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
-    deleteButton.classList.add('trash-btn');
-    todoDiv.appendChild(deleteButton)
-
-    // append it to todolist
-    todoList.appendChild(todoDiv);
-    // to clear input value from the form
+    newDiv.append(newTodo);
+    todoList.append(newDiv);
     todoInput.value = '';
-    // after creating an element attack a listener
-    tod
+
+    const completeButton = document.createElement('button');
+    completeButton.innerHTML = `<i class="fas fa-check"/>`;
+    completeButton.classList.add('complete-btn');
+    newDiv.append(completeButton);
+    // add eventlistener 
+    completeButton.addEventListener('click', checkComplete);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = `<i class="fas fa-trash"/>`;
+    deleteButton.classList.add('trash-btn');
+    newDiv.append(deleteButton);
+    deleteButton.addEventListener('click', deleteTasks);
 }
 
-// add delete function
-function deleteCheck(){
-    
+function checkComplete(e){
+    const item = e.target;
+
+    item.parentElement.classList.toggle('completed');
+    console.log(item.parentElement);
+}
+
+function deleteTasks(e){
+    const item = e.target;
+    item.parentElement.remove();
+    // console.log(item.parentElement);
 }

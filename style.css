@@ -95,3 +95,8 @@ form button:hover{
    text-decoration: line-through;
    opacity: 0.3;
 }
+
+.fall{
+    opacity: 30%;
+    transform: translateY(8rem) rotateZ(20deg);
+}
